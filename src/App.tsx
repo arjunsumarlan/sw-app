@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  useEffect(() =>{
+    async function get() {
+      const data = await fetch('https://newsapi.org/v2/top-headlines?country=id&apiKey=73b25b0748614b89b24dc491c8081185');
+      if (data.ok) {
+        console.log('Data fetch: ', await data.json());
+      }
+    }
+
+    get();
+  },[]);
+
   return (
     <div className="App">
       <header className="App-header">
