@@ -3,15 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  useEffect(() =>{
-    async function get() {
-      const data = await fetch('https://newsapi.org/v2/top-headlines?country=id&apiKey=73b25b0748614b89b24dc491c8081185');
-      if (data.ok) {
-        console.log('Data fetch: ', await data.json());
-      }
-    }
-
-    get();
+  useEffect(() => {
+    setInterval(() => {
+      fetch('https://newsapi.org/v2/top-headlines?country=id&apiKey=73b25b0748614b89b24dc491c8081185')
+        .then(async res => {
+          console.log(await res.json());
+        });
+    }, 1000);
   },[]);
 
   return (

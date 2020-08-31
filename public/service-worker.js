@@ -8,6 +8,17 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
     if (event.request.url === 'https://newsapi.org/v2/top-headlines?country=id&apiKey=73b25b0748614b89b24dc491c8081185') {
-        console.log('Found it...');
+        if (!navigator.onLine) {
+            console.log('offline...');
+            event.respondWith(async function() {
+                var fallbackResponse = {
+                    message: 'haiiii...'
+                };
+
+                return new Response(JSON.stringify(fallbackResponse), {
+                    headers: {'Content-Type': 'application/json'}
+                });
+            }());
+        }
     }
 });
